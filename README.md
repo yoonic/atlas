@@ -24,7 +24,7 @@ In order to setup, run and start hacking the app locally you just have to:
 
 1. Clone this repository
 2. `npm install`
-3. Start rethinkdb server and, in a browser, navigate to http://localhost:8080/#tables (RethinkDB admin)
+3. Start rethinkdb server and, in a browser, navigate to `http://localhost:8080/#tables` (RethinkDB admin)
 4. Create a database named `atlas`
 5. In that database, create the following tables:
   - `Carts`
@@ -39,13 +39,13 @@ In order to setup, run and start hacking the app locally you just have to:
   - Add it to the configuration file at `config/development` in `app.jwtKey`
 6. In the directory of the Atlas clone, run `npm run dev`
 
-At this point, you should be have your local deploy of Atlas running on http://localhost:8000 and can point your local deploy of Storefront to it.
+At this point, you should be have your local deploy of Atlas running on `http://localhost:8000` and can point your local deploy of Storefront to it.
 
 ### Admin Account
 In order to access Storefront's Admin and perform certain API calls, an Administrator account is required.
 
 1. Create an account (either via the API or Storefront)
-2. In a browser, navigate to http://localhost:8080/#dataexplorer
+2. In a browser, navigate to `http://localhost:8080/#dataexplorer`
 3. Run the following query `r.db('atlas').table('Users').filter({email: '{YOUR_USER_EMAIL}'}).update({status: 'active', scope: ['admin']});` (don't forget to replace `{YOUR_USER_EMAIL}` with the email address of the account you created)
 
 ## Contacts
