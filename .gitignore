@@ -1,0 +1,6 @@
+node_modules
+rethinkdb_data
+heapdump-*
+logs
+uploads
+.idea

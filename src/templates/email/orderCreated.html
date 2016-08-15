@@ -1,0 +1,227 @@
+<div style="background:#f6f6f6;font-family:Verdana,Arial,Helvetica,sans-serif;font-size:12px;margin:0;padding:0">
+    <div style="background:#f6f6f6;font-family:Verdana,Arial,Helvetica,sans-serif;font-size:12px;margin:0;padding:0">
+        <table cellspacing="0" cellpadding="0" border="0" height="100%" width="100%">
+            <tbody>
+                <tr>
+                    <td align="center" valign="top" style="padding:20px 0 20px 0">
+                        <table bgcolor="#FFFFFF" cellspacing="0" cellpadding="10" border="0" width="650" style="border:1px solid #e0e0e0">
+                            <tbody>
+                                <tr>
+                                    <td valign="top" style="text-align:center">
+                                        <a href="{{base.storefrontUrl}}" target="_blank">
+                                            <img src="{{base.storefrontUrl}}/static/logo.png" alt="nicistore.com" style="margin-bottom:10px" border="0">
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td valign="top">
+                                        <h1 style="font-size:22px;margin-top:0">
+                                            Olá {{data.customerDetails.name}},
+                                        </h1>
+                                        <p style="font-size: 18px">
+                                            Quando for confirmado o pagamento da sua encomenda, procederemos ao envio da mesma.
+                                            Em baixo encontra todos os detalhes, bem como instruções sobre o pagamento.
+                                        </p>
+                                        <p style="font-size: 18px">
+                                            Se tiver alguma questão, não hesite em responder a este e-mail com as suas dúvidas.
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center;">
+                                        <h2 style="font-size:18px;margin-top:0">
+                                            ID da Encomenda:<br>
+                                            {{data.order.id}}
+                                        </h2>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table cellspacing="0" cellpadding="0" border="0" width="650">
+                                            <thead>
+                                                <tr>
+                                                    <th align="left" width="325" bgcolor="#EAEAEA" style="font-size:13px;padding:5px 9px 6px 9px;line-height:1em">
+                                                        Dados de Facturação:
+                                                    </th>
+                                                    <th width="10"></th>
+                                                    <th align="left" width="325" bgcolor="#EAEAEA" style="font-size:13px;padding:5px 9px 6px 9px;line-height:1em">
+                                                        Método de Pagamento:
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td valign="top" style="font-size:12px;padding:7px 9px 9px 9px;border-left:1px solid #eaeaea;border-bottom:1px solid #eaeaea;border-right:1px solid #eaeaea">
+                                                        {{data.checkout.billingAddress.name}}<br>
+                                                        {{data.checkout.billingAddress.addressLine1}}<br>
+                                                        {{#if data.checkout.billingAddress.addressLine2}}
+                                                            {{data.checkout.billingAddress.addressLine2}}<br>
+                                                        {{/if}}
+                                                        {{data.checkout.billingAddress.city}}, {{data.checkout.billingAddress.postalCode}}<br>
+                                                        {{data.checkout.billingAddress.country}}<br>
+                                                        {{#if data.checkout.billingAddress.phone}}
+                                                            T: {{data.checkout.billingAddress.phone}}
+                                                        {{/if}}
+                                                        {{#if data.checkout.billingAddress.vatin}}
+                                                            <br />
+                                                            <br />
+                                                            <strong>NIF:</strong>
+                                                            {{data.checkout.billingAddress.vatin}}
+                                                        {{/if}}
+                                                    </td>
+                                                    <td>&nbsp;</td>
+                                                    <td valign="top" style="padding:7px 9px 9px 9px;border-left:1px solid #eaeaea;border-bottom:1px solid #eaeaea;border-right:1px solid #eaeaea">
+                                                        <table border="0" cellspacing="1" cellpadding="0">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>
+                                                                        <img src="{{base.storefrontUrl}}/static/paymentMethods/{{data.checkout.paymentMethod}}.png"
+                                                                             border="0"
+                                                                             width="100"
+                                                                             alt="{{data.checkout.paymentMethod}}"
+                                                                             title="{{data.checkout.paymentMethod}}">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <table width="100%" border="0" cellspacing="1" cellpadding="0">
+                                                                            <tbody style="font-size:12px;">
+                                                                                {{#each data.instrumentDisplay}}
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        <strong>{{label}}:</strong>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        {{value}}
+                                                                                    </td>
+                                                                                </tr>
+                                                                                {{/each}}
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <br>
+                                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                                            <thead>
+                                                <tr>
+                                                    <th align="left" width="325" bgcolor="#EAEAEA" style="font-size:13px;padding:5px 9px 6px 9px;line-height:1em">Dados de Envio:</th>
+                                                    <th width="10"></th>
+                                                    <th align="left" width="325" bgcolor="#EAEAEA" style="font-size:13px;padding:5px 9px 6px 9px;line-height:1em">Método de Envio:</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td valign="top" style="font-size:12px;padding:7px 9px 9px 9px;border-left:1px solid #eaeaea;border-bottom:1px solid #eaeaea;border-right:1px solid #eaeaea">
+                                                        {{data.checkout.shippingAddress.name}}<br>
+                                                        {{data.checkout.shippingAddress.addressLine1}}<br>
+                                                        {{#if data.checkout.shippingAddress.addressLine2}}
+                                                        {{data.checkout.shippingAddress.addressLine2}}<br>
+                                                        {{/if}}
+                                                        {{data.checkout.shippingAddress.city}}, {{data.checkout.shippingAddress.postalCode}}<br>
+                                                        {{data.checkout.shippingAddress.country}}<br>
+                                                        {{#if data.checkout.shippingAddress.phone}}
+                                                        T: {{data.checkout.shippingAddress.phone}}
+                                                        {{/if}}
+                                                    </td>
+                                                    <td>&nbsp;</td>
+                                                    <td valign="top" style="font-size:12px;padding:7px 9px 9px 9px;border-left:1px solid #eaeaea;border-bottom:1px solid #eaeaea;border-right:1px solid #eaeaea">
+                                                        {{data.shippingDetails.name.pt}}
+                                                        &nbsp;
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <br>
+                                        <table cellspacing="0" cellpadding="0" border="0" width="650" style="border:1px solid #eaeaea">
+                                            <thead>
+                                                <tr>
+                                                    <th align="left" bgcolor="#EAEAEA" style="font-size:13px;padding:3px 9px">Item</th>
+                                                    <th align="left" bgcolor="#EAEAEA" style="font-size:13px;padding:3px 9px">Ref</th>
+                                                    <th align="center" bgcolor="#EAEAEA" style="font-size:13px;padding:3px 9px">Qt</th>
+                                                    <th align="right" bgcolor="#EAEAEA" style="font-size:13px;padding:3px 9px">Preço</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody bgcolor="#F6F6F6">
+                                                {{#each data.checkout.cart.products}}
+                                                <tr>
+                                                    <td align="left" valign="top" style="font-size:11px;padding:3px 9px">
+                                                        <a href="{{../base.storefrontUrl}}/pt/products/{{id}}" style="color:#1e7ec8" target="_blank">
+                                                            {{details.name.pt}}
+                                                        </a>
+                                                    </td>
+                                                    <td align="left" valign="top" style="font-size:11px;padding:3px 9px">
+                                                        {{details.sku}}
+                                                    </td>
+                                                    <td align="center" valign="top" style="font-size:11px;padding:3px 9px">
+                                                        {{quantity}}
+                                                    </td>
+                                                    <td align="right" valign="top" style="font-size:11px;padding:3px 9px;border-bottom:1px dotted #cccccc">
+                                                        <span>{{details.pricing.retail}}&nbsp;€</span>
+                                                    </td>
+                                                </tr>
+                                                {{/each}}
+                                            </tbody>
+                                            <tbody style="font-size:11px;">
+                                                <tr>
+                                                    <td colspan="3" align="right" style="padding:3px 9px">
+                                                        Sub-total
+                                                    </td>
+                                                    <td align="right" style="padding:3px 9px">
+                                                        <span>{{data.checkout.subTotal}}&nbsp;€</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="3" align="right" style="padding:3px 9px">
+                                                        Portes
+                                                    </td>
+                                                    <td align="right" style="padding:3px 9px">
+                                                        <span>{{data.checkout.shippingCost}}&nbsp;€</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="3" align="right" style="padding:3px 9px">
+                                                        IVA
+                                                    </td>
+                                                    <td align="right" style="padding:3px 9px">
+                                                        <span>{{data.checkout.vatTotal}}&nbsp;€</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="3" align="right" style="padding:3px 9px">
+                                                        <strong>Total</strong>
+                                                    </td>
+                                                    <td align="right" style="padding:3px 9px">
+                                                        <strong><span>{{data.checkout.total}}&nbsp;€</span></strong>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <p style="font-size:12px;margin:0 10px 10px 0"></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td bgcolor="#EAEAEA" align="center" style="background:#eaeaea;text-align:center">
+                                        <center>
+                                            <p style="font-size:12px;margin:0">
+                                                Obrigado pela preferência,
+                                                <a href="{{base.storefrontUrl}}" style="color:#1e7ec8" target="_blank">
+                                                    {{base.storefrontLabel}}
+                                                </a>
+                                            </p>
+                                        </center>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
