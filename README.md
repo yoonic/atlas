@@ -15,7 +15,7 @@ It was built with the [Yoonic E-Commerce Storefront](https://github.com/yoonic/n
 
 ## Requirements
 
-- Node.js + NPM
+- Node.js + NPM (v4.x LTS)
 - [Rethinkdb](http://rethinkdb.com/)
 - [Yoonic Storefront](https://github.com/yoonic/nicistore) (optional)
 
