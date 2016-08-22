@@ -38,6 +38,8 @@ export default [
                 mode: 'try',
                 strategy: 'jwt'
             },
+            description: 'Create a new checkout',
+            tags: ['api'],
             validate: {
                 payload: {
                     cartId: Joi.string().required(),
@@ -59,7 +61,15 @@ export default [
                 mode: 'try',
                 strategy: 'jwt'
             },
+            description: 'Get checkout',
+            notes: 'Returns a checkout by the id passed in the path',
+            tags: ['api'],
             pre: [routePrerequisites.validCheckoutAndPermissions],
+            validate: {
+                params: {
+                    checkoutId: Joi.string().required().description('the id for the checkout'),
+                }
+            },
             response: {
                 schema: CheckoutSerializer.schema
             }
@@ -74,7 +84,14 @@ export default [
                 mode: 'try',
                 strategy: 'jwt'
             },
+            description: 'Update checkout',
+            tags: ['api'],
             pre: [routePrerequisites.validCheckoutAndPermissions],
+            validate: {
+                params: {
+                    checkoutId: Joi.string().required().description('the id for the checkout'),
+                }
+            },
             response: {
                 schema: CheckoutSerializer.schema
             }

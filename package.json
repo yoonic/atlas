@@ -21,12 +21,14 @@
     "hapi": "11.1.4",
     "hapi-async-handler": "1.0.3",
     "hapi-auth-jwt2": "5.8.0",
+    "hapi-swagger": "^6.2.2",
     "inert": "3.2.0",
     "joi": "6.10.1",
     "jsonwebtoken": "5.7.0",
     "node-uuid": "1.4.7",
     "request": "2.71.0",
-    "rethinkdbdash": "2.2.18"
+    "rethinkdbdash": "2.2.18",
+    "vision": "^4.1.0"
   },
   "devDependencies": {
     "nodemon": "1.9.1"

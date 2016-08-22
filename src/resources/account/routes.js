@@ -24,6 +24,8 @@ export default [
         config: {
             handler: {async: AccountHandlers.get},
             auth: {strategy: 'jwt'},
+            description: 'Get user account details',
+            tags: ['api'],
             response: {
                 schema: AccountDetailsSerializer.schema
             }
@@ -35,6 +37,8 @@ export default [
         config: {
             handler: {async: AccountHandlers.patch},
             auth: {strategy: 'jwt'},
+            description: 'Update account details',
+            tags: ['api'],
             response: {
                 schema: AccountDetailsSerializer.schema
             }
@@ -45,6 +49,8 @@ export default [
         method: 'POST',
         config: {
             handler: {async: AccountLoginHandlers.post},
+            description: 'Create login session',
+            tags: ['api'],
             validate: {
                 payload: {
                     email: Joi.string().required(),
@@ -58,6 +64,8 @@ export default [
         method: 'POST',
         config: {
             handler: {async: AccountRegisterHandlers.post},
+            description: 'Register a new account',
+            tags: ['api'],
             validate: {
                 payload: {
                     name: Joi.string().required(),
@@ -72,6 +80,10 @@ export default [
         method: 'PATCH',
         config: {
             handler: {async: AccountRegisterHandlers.patch},
+            description: 'Activate account',
+            notes: 'When an account is registered, an email is sent with a link to confirm the user\'s email. ' +
+                'That link contains a token used to activate the newly registered account.',
+            tags: ['api'],
             validate: {
                 payload: {
                     token: Joi.string().required()
@@ -89,6 +101,8 @@ export default [
         method: 'POST',
         config: {
             handler: {async: AccountResetHandlers.post},
+            description: 'Request password reset',
+            tags: ['api'],
             validate: {
                 payload: {
                     email: Joi.string().required()
@@ -101,6 +115,8 @@ export default [
         method: 'PATCH',
         config: {
             handler: {async: AccountResetHandlers.patch},
+            description: 'Reset password',
+            tags: ['api'],
             validate: {
                 payload: {
                     token: Joi.string().required(),

@@ -1,6 +1,8 @@
 /**
  * Imports
  */
+import Joi from 'joi';
+
 import routePrerequisites from './routePrerequisites';
 
 // Data schemas
@@ -36,6 +38,8 @@ export default [
                 mode: 'try',
                 strategy: 'jwt'
             },
+            description: 'Create a new shopping cart',
+            tags: ['api'],
             response: {
                 schema: CartSerializer.schema
             }
@@ -50,7 +54,15 @@ export default [
                 mode: 'try',
                 strategy: 'jwt'
             },
+            description: 'Get cart',
+            notes: 'Returns a cart by the id passed in the path',
+            tags: ['api'],
             pre: [routePrerequisites.validCartAndPermissions],
+            validate: {
+                params: {
+                    cartId: Joi.string().required().description('the id for the cart'),
+                }
+            },
             response: {
                 schema: CartSerializer.schema
             }
@@ -65,7 +77,14 @@ export default [
                 mode: 'try',
                 strategy: 'jwt'
             },
+            description: 'Update cart',
+            tags: ['api'],
             pre: [routePrerequisites.validCartAndPermissions],
+            validate: {
+                params: {
+                    cartId: Joi.string().required().description('the id for the cart'),
+                }
+            },
             response: {
                 schema: CartSerializer.schema
             }

@@ -2,7 +2,9 @@
  * Imports
  */
 import Hapi from 'hapi';
+import HapiSwagger from 'hapi-swagger';
 import Inert from 'inert';
+import Vision from 'vision';
 
 import config from './config';
 import log from './logging';
@@ -30,6 +32,38 @@ server.connection({
                 'Origin'
             ]
         }
+    }
+});
+
+// Swagger API Documentation
+const Pack = require('../package');
+server.register([Inert, Vision, {
+    register: HapiSwagger,
+    options: {
+        info: {
+            title: 'ATLAS API Documentation',
+            version: Pack.version,
+        },
+        documentationPath: `${config.app.routePrefix || ''}/docs`,
+        pathReplacements: [{
+            replaceIn: 'groups',
+            pattern: /v([0-9]+)\//,
+            replacement: ''
+        }],
+        tags: [{
+            name: 'account',
+            description: 'Customer accounts'
+        }, {
+            name: 'carts',
+            description: 'Product shopping carts'
+        }, {
+            name: 'checkouts',
+            description: 'Checkout a cart'
+        }]
+    }
+}], function (err) {
+    if (err) {
+        log.warn(err, 'Unable to setup Swagger API documentation');
     }
 });
 
@@ -67,7 +101,7 @@ server.on('request-error', function (request, err) {
  */
 server.route({
     method: 'GET',
-    path: '/',
+    path: config.app.routePrefix || '/',
     handler: function (request, reply) {
         reply('oh, hai');
     }
@@ -105,7 +139,7 @@ db.testDatabase().then(function successFn() {
         if (err) {
             log.fatal(err, 'Unable to start Atlas server');
         } else {
-            log.info('Atlas running at:', server.info.uri);
+            log.info(`Atlas running at: ${server.info.uri}${config.app.routePrefix || ''}`);
         }
     });
 }, function errorFn(err) {
