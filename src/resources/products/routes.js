@@ -23,7 +23,12 @@ export default [
                 mode: 'try',
                 strategy: 'jwt'
             },
+            description: 'Get products collection',
+            tags: ['api'],
             validate: {
+                headers: Joi.object({
+                    'authorization': Joi.string().optional()
+                }).unknown(),
                 query: {
                     sku: Joi.string().optional(),
                     collections: Joi.string().optional(),
@@ -44,7 +49,12 @@ export default [
                 strategy: 'jwt',
                 scope: ['admin']
             },
+            description: 'Create new product',
+            tags: ['api'],
             validate: {
+                headers: Joi.object({
+                    'authorization': Joi.string().required()
+                }).unknown(),
                 payload: {
                     sku: Joi.string().required(),
                     name: Joi.object({
@@ -63,6 +73,16 @@ export default [
             auth: {
                 mode: 'try',
                 strategy: 'jwt'
+            },
+            description: 'Get product',
+            tags: ['api'],
+            validate: {
+                headers: Joi.object({
+                    'authorization': Joi.string().optional()
+                }).unknown(),
+                params: {
+                    productId: Joi.string().required().description('the id for the product'),
+                }
             }
         }
     },
@@ -75,7 +95,15 @@ export default [
                 strategy: 'jwt',
                 scope: ['admin']
             },
+            description: 'Update all product details',
+            tags: ['api'],
             validate: {
+                headers: Joi.object({
+                    'authorization': Joi.string().required()
+                }).unknown(),
+                params: {
+                    productId: Joi.string().required().description('the id for the product'),
+                },
                 payload: {
                     enabled: Joi.boolean().required(),
                     sku: Joi.string().required(),
@@ -112,6 +140,16 @@ export default [
             auth: {
                 strategy: 'jwt',
                 scope: ['admin']
+            },
+            description: 'Partial product update',
+            tags: ['api'],
+            validate: {
+                headers: Joi.object({
+                    'authorization': Joi.string().required()
+                }).unknown(),
+                params: {
+                    productId: Joi.string().required().description('the id for the product'),
+                }
             }
         }
     },
@@ -124,11 +162,20 @@ export default [
                 strategy: 'jwt',
                 scope: ['admin']
             },
+            description: 'Upload catalog information',
+            notes: 'Product content CSV and bulk image operations can be done using this endpoint',
+            tags: ['api'],
             payload: {
                 output: 'stream',
                 parse: true
             },
             validate: {
+                headers: Joi.object({
+                    'authorization': Joi.string().required()
+                }).unknown(),
+                params: {
+                    productId: Joi.string().required().description('the id for the product'),
+                },
                 payload: {
                     resource: Joi.string().required(),
                     file: Joi.object().optional(),

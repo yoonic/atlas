@@ -27,6 +27,13 @@ export default [
             handler: {async: OrdersHandler.get},
             auth: {
                 strategy: 'jwt'
+            },
+            description: 'Get orders collection',
+            tags: ['api'],
+            validate: {
+                headers: Joi.object({
+                    'authorization': Joi.string().required()
+                }).unknown(),
             }
         }
     },
@@ -39,7 +46,12 @@ export default [
                 mode: 'try',
                 strategy: 'jwt'
             },
+            description: 'Create a new order',
+            tags: ['api'],
             validate: {
+                headers: Joi.object({
+                    'authorization': Joi.string().optional()
+                }).unknown(),
                 payload: {
                     checkoutId: Joi.string().required()
                 }
@@ -57,7 +69,17 @@ export default [
             auth: {
                 strategy: 'jwt'
             },
-            pre: [routePrerequisites.validOrder]
+            description: 'Get order',
+            tags: ['api'],
+            pre: [routePrerequisites.validOrder],
+            validate: {
+                headers: Joi.object({
+                    'authorization': Joi.string().required()
+                }).unknown(),
+                params: {
+                    orderId: Joi.string().required().description('the id for the order'),
+                }
+            }
         }
     },
     {
@@ -69,7 +91,17 @@ export default [
                 strategy: 'jwt',
                 scope: ['admin']
             },
-            pre: [routePrerequisites.validOrder]
+            description: 'Update order',
+            tags: ['api'],
+            pre: [routePrerequisites.validOrder],
+            validate: {
+                headers: Joi.object({
+                    'authorization': Joi.string().required()
+                }).unknown(),
+                params: {
+                    orderId: Joi.string().required().description('the id for the order'),
+                }
+            }
         }
     },
     {
@@ -81,7 +113,16 @@ export default [
                 strategy: 'jwt',
                 scope: ['admin']
             },
+            description: 'Send transactional email',
+            notes: 'This endpoint enables manual triggering of certain transactional emails',
+            tags: ['api'],
             validate: {
+                headers: Joi.object({
+                    'authorization': Joi.string().required()
+                }).unknown(),
+                params: {
+                    orderId: Joi.string().required().description('the id for the order'),
+                },
                 payload: {
                     template: Joi.string().required(),
                     email: Joi.string().required(),
@@ -94,7 +135,15 @@ export default [
         path: '/{orderId}/spwh',
         method: 'POST',
         config: {
-            handler: {async: SwitchPaymentsWebhookHandler.post}
+            handler: {async: SwitchPaymentsWebhookHandler.post},
+            description: 'Switch Payments webhook',
+            tags: ['api'],
+            validate: {
+                params: {
+                    orderId: Joi.string().required().description('the id for the order'),
+                }
+            }
+
         }
     }
 ];

@@ -40,6 +40,11 @@ export default [
             },
             description: 'Create a new shopping cart',
             tags: ['api'],
+            validate: {
+                headers: Joi.object({
+                    'authorization': Joi.string().optional()
+                }).unknown()
+            },
             response: {
                 schema: CartSerializer.schema
             }
@@ -59,6 +64,9 @@ export default [
             tags: ['api'],
             pre: [routePrerequisites.validCartAndPermissions],
             validate: {
+                headers: Joi.object({
+                    'authorization': Joi.string().optional()
+                }).unknown(),
                 params: {
                     cartId: Joi.string().required().description('the id for the cart'),
                 }
@@ -81,6 +89,9 @@ export default [
             tags: ['api'],
             pre: [routePrerequisites.validCartAndPermissions],
             validate: {
+                headers: Joi.object({
+                    'authorization': Joi.string().optional()
+                }).unknown(),
                 params: {
                     cartId: Joi.string().required().description('the id for the cart'),
                 }

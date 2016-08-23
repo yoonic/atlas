@@ -19,6 +19,13 @@ export default [
                 strategy: 'jwt',
                 scope: 'admin'
             },
+            description: 'Get users collection',
+            tags: ['api'],
+            validate: {
+                headers: Joi.object({
+                    'authorization': Joi.string().required()
+                }).unknown()
+            },
             response: {
                 schema: {
                     items: Joi.array().items(UserSerializer.schema)

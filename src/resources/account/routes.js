@@ -26,6 +26,11 @@ export default [
             auth: {strategy: 'jwt'},
             description: 'Get user account details',
             tags: ['api'],
+            validate: {
+                headers: Joi.object({
+                    'authorization': Joi.string().required()
+                }).unknown()
+            },
             response: {
                 schema: AccountDetailsSerializer.schema
             }
@@ -39,6 +44,11 @@ export default [
             auth: {strategy: 'jwt'},
             description: 'Update account details',
             tags: ['api'],
+            validate: {
+                headers: Joi.object({
+                    'authorization': Joi.string().required()
+                }).unknown()
+            },
             response: {
                 schema: AccountDetailsSerializer.schema
             }

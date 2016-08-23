@@ -12,6 +12,8 @@ import routes from './routes';
 import * as db from './core/db';
 import {JWTAuthentication} from './core/authentication';
 
+const Pack = require('../package');
+
 /**
  * Server setup
  */
@@ -36,12 +38,11 @@ server.connection({
 });
 
 // Swagger API Documentation
-const Pack = require('../package');
 server.register([Inert, Vision, {
     register: HapiSwagger,
     options: {
         info: {
-            title: 'ATLAS API Documentation',
+            title: 'Atlas eCommerce API',
             version: Pack.version,
         },
         documentationPath: `${config.app.routePrefix || ''}/docs`,
@@ -59,6 +60,24 @@ server.register([Inert, Vision, {
         }, {
             name: 'checkouts',
             description: 'Checkout a cart'
+        }, {
+            name: 'collections',
+            description: 'Group of products'
+        }, {
+            name: 'contents',
+            description: 'Generic content'
+        }, {
+            name: 'files',
+            description: 'Manage files'
+        }, {
+            name: 'orders',
+            description: 'Customer orders'
+        }, {
+            name: 'products',
+            description: 'Manage products'
+        }, {
+            name: 'users',
+            description: 'Manage users'
         }]
     }
 }], function (err) {

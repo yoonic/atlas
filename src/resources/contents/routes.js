@@ -26,7 +26,12 @@ export default [
                 mode: 'try',
                 strategy: 'jwt'
             },
+            description: 'Get contents collection',
+            tags: ['api'],
             validate: {
+                headers: Joi.object({
+                    'authorization': Joi.string().optional()
+                }).unknown(),
                 query: {
                     type: Joi.string().optional(),
                     tags: Joi.string().optional(),
@@ -44,7 +49,12 @@ export default [
                 strategy: 'jwt',
                 scope: ['admin']
             },
+            description: 'Create new content',
+            tags: ['api'],
             validate: {
+                headers: Joi.object({
+                    'authorization': Joi.string().required()
+                }).unknown(),
                 payload: {
                     type: Joi.string().required(),
                     name: Joi.object().required()
@@ -68,6 +78,16 @@ export default [
                 mode: 'try',
                 strategy: 'jwt'
             },
+            description: 'Get content',
+            tags: ['api'],
+            validate: {
+                headers: Joi.object({
+                    'authorization': Joi.string().optional()
+                }).unknown(),
+                params: {
+                    contentId: Joi.string().required().description('the id for the content'),
+                },
+            },
             response: {
                 schema: ContentSerializer.schema
             }
@@ -82,7 +102,15 @@ export default [
                 strategy: 'jwt',
                 scope: ['admin']
             },
+            description: 'Update content',
+            tags: ['api'],
             validate: {
+                headers: Joi.object({
+                    'authorization': Joi.string().required()
+                }).unknown(),
+                params: {
+                    contentId: Joi.string().required().description('the id for the content'),
+                },
                 payload: {
                     enabled: Joi.boolean().required(),
                     collections: Joi.array().required(),
@@ -108,7 +136,15 @@ export default [
             auth: {
                 strategy: 'jwt'
             },
+            description: 'Add user comment',
+            tags: ['api'],
             validate: {
+                headers: Joi.object({
+                    'authorization': Joi.string().required()
+                }).unknown(),
+                params: {
+                    contentId: Joi.string().required().description('the id for the content'),
+                },
                 payload: {
                     message: Joi.string().required()
                 }

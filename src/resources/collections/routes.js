@@ -22,7 +22,12 @@ export default [
                 mode: 'try',
                 strategy: 'jwt'
             },
+            description: 'Get all the collections',
+            tags: ['api'],
             validate: {
+                headers: Joi.object({
+                    'authorization': Joi.string().optional()
+                }).unknown(),
                 query: {
                     tags: Joi.string().optional()
                 }
@@ -38,7 +43,12 @@ export default [
                 strategy: 'jwt',
                 scope: ['admin']
             },
+            description: 'Create new collection',
+            tags: ['api'],
             validate: {
+                headers: Joi.object({
+                    'authorization': Joi.string().required()
+                }).unknown(),
                 payload: {
                     name: Joi.object().required(),
                     tags: Joi.array().required()
@@ -61,6 +71,17 @@ export default [
             auth: {
                 mode: 'try',
                 strategy: 'jwt'
+            },
+            description: 'Get collection',
+            notes: 'Returns a collection by the id passed in the path',
+            tags: ['api'],
+            validate: {
+                headers: Joi.object({
+                    'authorization': Joi.string().optional()
+                }).unknown(),
+                params: {
+                    collectionId: Joi.string().required().description('the id for the collection'),
+                }
             }
         }
     },
@@ -73,7 +94,15 @@ export default [
                 strategy: 'jwt',
                 scope: ['admin']
             },
+            description: 'Update collection',
+            tags: ['api'],
             validate: {
+                headers: Joi.object({
+                    'authorization': Joi.string().required()
+                }).unknown(),
+                params: {
+                    collectionId: Joi.string().required().description('the id for the collection'),
+                },
                 payload: {
                     enabled: Joi.boolean().required(),
                     name: Joi.object({

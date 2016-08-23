@@ -1,17 +1,32 @@
 # Welcome
-Atlas is an E-Commerce Backend API that provides services for:
-
-- User Accounts
-- Contents (think of it as a mini CMS)
-- Products
-- Collections (group of Products, Contents, Users)
-- Carts
-- Checkouts
-- Orders
+Atlas is an E-Commerce Backend (RESTful) API.
 
 It was built with the [Yoonic E-Commerce Storefront](https://github.com/yoonic/nicistore) application in mind and you can check it out live powering [NICI Store](https://nicistore.com)!
 
-> Why build plugins when you can build your own e-commerce platform?
+> Why write plugins when you can build your own e-commerce platform?
+
+![Swagger API Documentation](/screenshots/SwaggerDocs.png?raw=true "Swagger API Documentation")
+
+### API Resources
+After deploying and running Atlas locally, you can access the [Swagger](https://openapis.org/) API Documentation by browsing to `localhost:8000/docs`.
+
+Overall, Atlas provides services for:
+
+- User Accounts
+- Contents
+  - Homepage Banners
+  - Articles
+  - Content common to all Product Pages
+  - ... <-- Whatever you wish :)
+- Products
+- Collections
+  - Products
+  - Contents
+  - Customers
+  - ... <-- Your own segmentation engine!
+- Carts
+- Checkouts
+- Orders
 
 ## Requirements
 
