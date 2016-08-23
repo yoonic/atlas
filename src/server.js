@@ -38,53 +38,57 @@ server.connection({
 });
 
 // Swagger API Documentation
-server.register([Inert, Vision, {
-    register: HapiSwagger,
-    options: {
-        info: {
-            title: 'Atlas eCommerce API',
-            version: Pack.version,
-        },
-        documentationPath: `${config.app.routePrefix || ''}/docs`,
-        pathReplacements: [{
-            replaceIn: 'groups',
-            pattern: /v([0-9]+)\//,
-            replacement: ''
-        }],
-        tags: [{
-            name: 'account',
-            description: 'Customer accounts'
-        }, {
-            name: 'carts',
-            description: 'Product shopping carts'
-        }, {
-            name: 'checkouts',
-            description: 'Checkout a cart'
-        }, {
-            name: 'collections',
-            description: 'Group of products'
-        }, {
-            name: 'contents',
-            description: 'Generic content'
-        }, {
-            name: 'files',
-            description: 'Manage files'
-        }, {
-            name: 'orders',
-            description: 'Customer orders'
-        }, {
-            name: 'products',
-            description: 'Manage products'
-        }, {
-            name: 'users',
-            description: 'Manage users'
-        }]
-    }
-}], function (err) {
-    if (err) {
-        log.warn(err, 'Unable to setup Swagger API documentation');
-    }
-});
+if (process.env.NODE_ENV !== 'production') {
+    const documentationPath = `${config.app.routePrefix || ''}/docs`;
+    log.info(`Initializing Swagger API documentation at: ${documentationPath}`);
+    server.register([Inert, Vision, {
+        register: HapiSwagger,
+        options: {
+            info: {
+                title: 'Atlas eCommerce API',
+                version: Pack.version,
+            },
+            documentationPath: documentationPath,
+            pathReplacements: [{
+                replaceIn: 'groups',
+                pattern: /v([0-9]+)\//,
+                replacement: ''
+            }],
+            tags: [{
+                name: 'account',
+                description: 'Customer accounts'
+            }, {
+                name: 'carts',
+                description: 'Product shopping carts'
+            }, {
+                name: 'checkouts',
+                description: 'Checkout a cart'
+            }, {
+                name: 'collections',
+                description: 'Group of products'
+            }, {
+                name: 'contents',
+                description: 'Generic content'
+            }, {
+                name: 'files',
+                description: 'Manage files'
+            }, {
+                name: 'orders',
+                description: 'Customer orders'
+            }, {
+                name: 'products',
+                description: 'Manage products'
+            }, {
+                name: 'users',
+                description: 'Manage users'
+            }]
+        }
+    }], function (err) {
+        if (err) {
+            log.warn(err, 'Unable to setup Swagger API documentation');
+        }
+    });
+}
 
 // Enable async/await handlers
 server.register(require('hapi-async-handler'), function (err) {
