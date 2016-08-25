@@ -73,9 +73,6 @@ class Collection {
      */
     @DBDecorators.table(tables.Collection)
     static async update(collectionId, {enabled, images, name, tags, metadata, parentId, description=null}) {
-
-        console.log(parentId);
-
         let obj = {
             enabled,
             images,
