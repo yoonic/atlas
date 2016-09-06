@@ -28,6 +28,12 @@ Overall, Atlas provides services for:
 - Checkouts
 - Orders
 
+### Batteries Included
+- [Mailgun](https://mailgun.com) for transactional emails
+- [Switch Payments](https://switchpayments.com) for payments
+
+Storefront has a few more tricks up its sleeve ;)
+
 ## Requirements
 
 - Node.js + NPM (v4.x LTS)
@@ -64,4 +70,6 @@ In order to access Storefront's Admin and perform certain API calls, an Administ
 3. Run the following query `r.db('atlas').table('Users').filter({email: '{YOUR_USER_EMAIL}'}).update({status: 'active', scope: ['admin']});` (don't forget to replace `{YOUR_USER_EMAIL}` with the email address of the account you created)
 
 ## Contacts
-Comments, suggestions, doubts, flames, /dev/random > http://twitter.com/andreftavares
+Comments, suggestions, doubts, flames, /dev/random, etc...
+- Email **andre [at] yoonic.net**
+- Twitter [@andreftavares](http://twitter.com/andreftavares)
