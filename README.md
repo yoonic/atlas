@@ -1,17 +1,14 @@
 # Welcome
-Atlas is an E-Commerce Backend (RESTful) API.
+Atlas is an E-Commerce RESTful API.
 
-It was built with the [Yoonic E-Commerce Storefront](https://github.com/yoonic/nicistore) application in mind and you can check it out live powering [NICI Store](https://nicistore.com/en)!
+Pair it with [Yoonic E-Commerce Storefront](https://github.com/yoonic/nicistore) and you'll have your own e-commerce website running on NodeJS!
 
-> Why write plugins when you can build your own e-commerce platform?
+You can check out a live example at the [NICI Store](https://nicistore.com/en)
 
-![Swagger API Documentation](/screenshots/SwaggerDocs.png?raw=true "Swagger API Documentation")
+![Swagger API Documentation](http://i.imgur.com/WENl84g.png "Swagger API Documentation")
 
-### API Resources
-After deploying and running Atlas locally, you can access the [Swagger](https://openapis.org/) API Documentation by browsing to `localhost:8000/docs`.
-
+## Features
 Overall, Atlas provides services for:
-
 - User Accounts
 - Contents
   - Homepage Banners
@@ -28,7 +25,7 @@ Overall, Atlas provides services for:
 - Checkouts
 - Orders
 
-### Batteries Included
+## Batteries Included
 - [Mailgun](https://mailgun.com) for transactional emails
 - [Switch Payments](https://switchpayments.com) for payments
 
@@ -36,18 +33,24 @@ Storefront has a few more tricks up its sleeve ;)
 
 ## Requirements
 
-- Node.js + NPM (v4.x LTS)
+- [Node.js](https://nodejs.org) (v4.x LTS) + NPM 
 - [Rethinkdb](http://rethinkdb.com/)
-- [Yoonic Storefront](https://github.com/yoonic/nicistore) (optional)
+
+### Optional
+- [Yoonic Storefront](https://github.com/yoonic/nicistore) 
 
 ## Installation
-In order to setup, run and start hacking the app locally you just have to:
+You can install it locally or use the [Docker](https://www.docker.com/) setup.
 
+### Locally
 1. Clone this repository
-2. `npm install`
-3. Start rethinkdb server and, in a browser, navigate to `http://localhost:8080/#tables` (RethinkDB admin)
-4. Create a database named `atlas`
-5. In that database, create the following tables:
+`git clone https://github.com/yoonic/atlas.git`
+2. Install the dependencies
+`cd atlas && npm install`
+3. Install and Start [Rethinkdb](https://www.rethinkdb.com/) server 
+- Navigate to `http://localhost:8080/#tables` (RethinkDB admin)
+- Create a database named `atlas`
+- In that database, create the following tables:
   - `Carts`
   - `Checkouts`
   - `Collections`
@@ -55,12 +58,31 @@ In order to setup, run and start hacking the app locally you just have to:
   - `Orders`
   - `Products`
   - `Users`
-7. Create a JWT secret key (e.g. using `openssl rand -base64 32`) and either:
+4. Create a JWT secret key (e.g. using `openssl rand -base64 32`) and either:
   - Setup the env variable `JWT_KEY`
   - Add it to the configuration file at `config/development` in `app.jwtKey`
-6. In the directory of the Atlas clone, run `npm run dev`
+5. Run it!
+`npm run dev`
 
-At this point, you should be have your local deploy of Atlas running on `http://localhost:8000` and can point your local deploy of Storefront to it.
+At this point, you should be have your local deploy of Atlas running on `http://localhost:8000` 
+
+### Docker
+1. Download and install [Docker](https://docs.docker.com/engine/installation/)
+2. Clone this repository
+`git clone https://github.com/yoonic/atlas.git`
+3. Change directory to Atlas
+`cd atlas`
+4. Create a JWT secret key (e.g. using `openssl rand -base64 32`) and either:
+  - Setup the env variable `JWT_KEY`
+  - Add it to the configuration file at `config/development` in `app.jwtKey`
+5. In **config/development.js** change line 13 to `host: process.env.DB_PORT_28015_TCP_ADDR || 'rethink',`
+6. Run Docker Compose
+`docker-compose up -d`
+7. Check Kitematic to see the status of your containers, it should be running on `http://localhost:8000` 
+
+**Note:** Docker will save content to the docker/data folder.
+## Usage
+After deploying and running Atlas locally, you can access the [Swagger](https://openapis.org/) API Documentation by browsing to `localhost:8000/docs`.
 
 ### Admin Account
 In order to access Storefront's Admin and perform certain API calls, an Administrator account is required.
