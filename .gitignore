@@ -4,3 +4,4 @@ logs
 uploads
 .idea
 log_file
+rethinkdb_data 

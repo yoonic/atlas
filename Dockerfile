@@ -16,8 +16,9 @@ RUN npm install -g node-gyp && \
 
 RUN npm install
 
-ENV NODE_ENV development
+# Default value, but will be overriden by whatever user or docker-compose provides
+ENV NODE_ENV dev
 # Expose application server port
 EXPOSE 8000
 
-CMD ["npm", "run", "dev"]
+CMD npm run ${NODE_ENV}

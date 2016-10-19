@@ -16,7 +16,14 @@ async function testDatabase() {
         try {
             let dbExists = !!(await rethinkdb.dbList()).includes(config.database.name);
             if (!dbExists) {
-                return reject({detail: 'Database does not exist'});
+                rethinkdb.dbCreate(config.database.name).run();
+                rethinkdb.db(config.database.name).tableCreate("Carts").run();
+                rethinkdb.db(config.database.name).tableCreate("Checkouts").run();
+                rethinkdb.db(config.database.name).tableCreate("Collections").run();
+                rethinkdb.db(config.database.name).tableCreate("Contents").run();
+                rethinkdb.db(config.database.name).tableCreate("Orders").run();
+                rethinkdb.db(config.database.name).tableCreate("Products").run();
+                rethinkdb.db(config.database.name).tableCreate("Users").run();
             } else {
                 return resolve();
             }

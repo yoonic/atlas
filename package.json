@@ -9,7 +9,9 @@
   },
   "main": "index.js",
   "scripts": {
-    "dev": "NODE_ENV=development nodemon index | bunyan"
+    "dev": "NODE_ENV=dev nodemon index | bunyan",
+    "prod": "NODE_ENV=prod node index.js",
+    "start": "NODE_ENV=prod node index.js"
   },
   "author": "André Tavares",
   "engines": {

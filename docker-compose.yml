@@ -6,6 +6,8 @@ atlas:
     - .:/src
   links:
     - rethink
+  environment:
+    - NODE_ENV=${NODE_ENV}
 rethink:
   image: greyarch/rethinkdb
   expose: 
