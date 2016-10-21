@@ -75,7 +75,7 @@ At this point, you should be have your local deploy of Atlas running on `http://
 4. Create a JWT secret key (e.g. using `openssl rand -base64 32`) and either:
   - Setup the env variable `JWT_KEY`
   - Add it to the configuration file at `config/development` in `app.jwtKey`
-5. In **config/development.js** change line 13 to `host: process.env.DB_PORT_28015_TCP_ADDR || 'rethink',`
+5. Change the *NODE_ENV* variable in *.env* to either *prod* or *dev*
 6. Run Docker Compose
 `docker-compose up -d`
 7. Check Kitematic to see the status of your containers, it should be running on `http://localhost:8000` 

@@ -1,23 +1,33 @@
 FROM node:4-onbuild
 
+# So we don't have to do everything as root
+RUN useradd --user-group --create-home --shell /bin/false app &&\
+  npm install --global npm@latest
+
+# Default value, but will be overriden 
+# by whatever user or docker-compose provides
+ENV NODE_ENV=dev
+
+# Workdir
+ENV HOME=/home/app
+
+# NPM Requirements
+COPY package.json $HOME/atlas/
 # Application source code
-COPY config/ /app/config
-COPY index.js /app/
-COPY scripts.js /app/
-COPY package.json /app/
+COPY config/ $HOME/atlas/config
+COPY index.js $HOME/atlas/
+COPY scripts.js $HOME/atlas/
 
-COPY src/ /app/src
-WORKDIR /app/src
+# Correct file permissions
+RUN chown -R app:app $HOME/*
 
-# Install node-gyp as global and ensure it's all clean and tide
-RUN npm install -g node-gyp && \
-    node-gyp clean && \
-    npm cache clean
+# Set Run Settings
+USER app
+WORKDIR $HOME/atlas
 
+# Install the dependencies
 RUN npm install
 
-# Default value, but will be overriden by whatever user or docker-compose provides
-ENV NODE_ENV dev
 # Expose application server port
 EXPOSE 8000
 

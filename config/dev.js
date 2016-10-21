@@ -10,7 +10,7 @@ export default {
     database: {
         servers: [
             {
-                host: process.env.DB_PORT_28015_TCP_ADDR || 'rethink',
+                host: process.env.DB_PORT_28015_TCP_ADDR || 'localhost',
                 port: process.env.DB_PORT_28015_TCP_PORT || 28015
             }
         ],

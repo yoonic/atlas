@@ -3,13 +3,16 @@ atlas:
   ports:
     - "8000:8000"
   volumes:
-    - .:/src
+    - ./src:/home/app/atlas/src
+    - /home/app/atlas/src/node_modules
   links:
     - rethink
   environment:
     - NODE_ENV=${NODE_ENV}
+    - DB_PORT_28015_TCP_ADDR=rethink
+
 rethink:
-  image: greyarch/rethinkdb
+  image: rethinkdb:latest
   expose: 
     - 28015
   ports:
@@ -17,10 +20,10 @@ rethink:
   volumes_from:
     - dbData
 
-# It is recommended to use a separate container for data volumes. 
-# This provides some benefits, for e.g., the db container can be upgraded without affecting the data
+# Separate container for data volumes. 
+# e.g., the db container can be upgraded without affecting the data
 dbData:
   image: busybox
   volumes:
     - ./docker/data:/data
-  command: echo Data Volume for db
+  command: echo Data Volume for rethink
