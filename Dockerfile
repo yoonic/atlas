@@ -1,30 +1,34 @@
-FROM debian:jessie
+FROM node:4-onbuild
 
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    curl \
-    nano \
-    supervisor
+# So we don't have to do everything as root
+RUN useradd --user-group --create-home --shell /bin/false app &&\
+  npm install --global npm@latest
 
-# Install Node.js
-RUN curl -sL https://deb.nodesource.com/setup_4.x | bash -
-RUN apt-get install -y nodejs
+# Default value, but will be overriden 
+# by whatever user or docker-compose provides
+ENV NODE_ENV=dev
 
-# Improve cache invalidations by only running npm if requirements have indeed changed
-WORKDIR /app
-COPY package.json /app/
-RUN npm install
+# Workdir
+ENV HOME=/home/app
 
-# Supervisor settings
-COPY docker/supervisord.conf /etc/supervisor/conf.d/atlas.conf
-
+# NPM Requirements
+COPY package.json $HOME/atlas/
 # Application source code
-COPY config/ /app/config
-COPY src/ /app/src
-COPY index.js /app/
-COPY scripts.js /app/
+COPY config/ $HOME/atlas/config
+COPY index.js $HOME/atlas/
+COPY scripts.js $HOME/atlas/
+
+# Correct file permissions
+RUN chown -R app:app $HOME/*
+
+# Set Run Settings
+USER app
+WORKDIR $HOME/atlas
+
+# Install the dependencies
+RUN npm install
 
 # Expose application server port
 EXPOSE 8000
 
-CMD ["supervisord", "-c", "/etc/supervisor/supervisord.conf", "-n"]
+CMD npm run ${NODE_ENV}

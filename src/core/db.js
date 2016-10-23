@@ -2,6 +2,7 @@
  * Imports
  */
 import config from '../config';
+import log from './logging';
 
 /**
  * Import and initialize RethinkDB connection pool
@@ -16,7 +17,19 @@ async function testDatabase() {
         try {
             let dbExists = !!(await rethinkdb.dbList()).includes(config.database.name);
             if (!dbExists) {
-                return reject({detail: 'Database does not exist'});
+                log.warn(`No Database found.`);
+                rethinkdb.dbCreate(config.database.name).run(function(err, result) {
+                    if (err) throw err;
+                    log.info(`Creating a new one and adding tables.`);
+                    rethinkdb.db(config.database.name).tableCreate("Carts").run();
+                    rethinkdb.db(config.database.name).tableCreate("Checkouts").run();
+                    rethinkdb.db(config.database.name).tableCreate("Collections").run();
+                    rethinkdb.db(config.database.name).tableCreate("Contents").run();
+                    rethinkdb.db(config.database.name).tableCreate("Orders").run();
+                    rethinkdb.db(config.database.name).tableCreate("Products").run();
+                    rethinkdb.db(config.database.name).tableCreate("Users").run();
+                });
+                return resolve();
             } else {
                 return resolve();
             }
