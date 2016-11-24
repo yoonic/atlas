@@ -173,9 +173,6 @@ export default [
                 headers: Joi.object({
                     'authorization': Joi.string().required()
                 }).unknown(),
-                params: {
-                    productId: Joi.string().required().description('the id for the product'),
-                },
                 payload: {
                     resource: Joi.string().required(),
                     file: Joi.object().optional(),
