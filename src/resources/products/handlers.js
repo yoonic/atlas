@@ -221,11 +221,11 @@ class ProductsUploadHandler {
                             },
                             pricing: {
                                 currency: row['currency'],
-                                list: row['listPrice'],
-                                retail: row['retailPrice'],
-                                vat: row['vat']
+                                list: parseFloat(row['listPrice']),
+                                retail: parseFloat(row['retailPrice']),
+                                vat: parseInt(row['vat'])
                             },
-                            stock: row['stock']
+                            stock: parseInt(row['stock'])
                         });
                     }
                 })
