@@ -1,6 +1,17 @@
-node_modules
-rethinkdb_data
+# Atlas Specific
+uploads
+
+# Logs
 heapdump-*
 logs
-uploads
+log_file
+
+# Database
+rethinkdb_data/
+
+# Node Files
+node_modules
+npm-debug.log
+
+# IDE
 .idea
