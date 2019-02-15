@@ -71,5 +71,4 @@ In order to access Storefront's Admin and perform certain API calls, an Administ
 
 ## Contacts
 Comments, suggestions, doubts, flames, /dev/random, etc...
-- Email **andre [at] yoonic.net**
 - Twitter [@andreftavares](http://twitter.com/andreftavares)
