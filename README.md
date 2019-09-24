@@ -1,7 +1,7 @@
 # Welcome
 Atlas is an E-Commerce Backend (RESTful) API.
 
-It was built with the [Yoonic E-Commerce Storefront](http://github.com/yoonic/nicistore) application in mind and you can check it out live powering [NICI Store](http://nicistore.com/en)!
+It was built with the [Yoonic E-Commerce Storefront](http://github.com/yoonic/nicistore) application in mind and you can check it out live powering [NICI Store](http://nicistore.andretavares.com/en)!
 
 > Why write plugins when you can build your own e-commerce platform?
 
